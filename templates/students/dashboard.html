@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white p-3">
+            <h3>{{ total_students }}</h3>
+            <p>Total Students</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white p-3">
+            <h3>{{ total_batches }}</h3>
+            <p>Active Batches</p>
+        </div>
+	<div class="card bg-warning text-dark p-3 shadow-sm">
+        <h3>₹ {{ total_revenue }}</h3>
+        <p>Total Revenue (May)</p>
+    	</div>
+    </div>
+</div>
+
+<div class="card shadow p-4">
+    <h4>Recent Enrolled Students</h4>
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td>{{ s.user}}</td>
+                <td>{{ s.batch.name }}</td>
+                <td>{{ s.phone_number }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No students found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

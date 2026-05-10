@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Mark Attendance</h2>
+        <span class="badge bg-info text-dark">Date: {{ today }}</span>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Batch</th>
+                    <th class="text-center">Present</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td>{{ s.user}}</td>
+                    <td>{{ s.batch.name }}</td>
+                    <td class="text-center">
+                        <input type="checkbox" name="student_ids" value="{{ s.id }}" class="form-check-input">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success w-100">Save Attendance</button>
+    </form>
+</div>
+{% endblock %}
